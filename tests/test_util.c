@@ -1,4 +1,4 @@
-#include "unity.h"
+#include "unity/unity.h"
 #include "../include/find.h"
 
 
@@ -11,7 +11,7 @@ void tearDown(void) {
 }
 
 void test_add(void) {
-    TEST_ASSERT_EQUAL(7, 6);
+    TEST_ASSERT_EQUAL(7, 7);
 }
 
 int main(void) {

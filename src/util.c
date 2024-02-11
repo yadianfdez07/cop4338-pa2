@@ -1,4 +1,4 @@
-#include "find.h"
+#include "../include/find.h"
 // this function finds an occurrence of needle in haystack
 // needle must be matched with a whole word in haystack...
 static char *strstr_fully_matched(char *haystack, char *needle)

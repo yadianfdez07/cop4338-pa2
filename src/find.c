@@ -1,4 +1,4 @@
-#include "find.h"
+#include "../include/find.h"
 
 char *lineptr[MAX_LINES];
 
