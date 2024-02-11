@@ -7,6 +7,14 @@
             "command": "make",
             "group": "build",
             "problemMatcher": "$gcc"
+        },
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "make",
+            "group": "test",
+            "dependsOn":["build"],
+            "problemMatcher": "$gcc"
         }
     ]
 }
