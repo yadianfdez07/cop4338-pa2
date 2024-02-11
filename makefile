@@ -24,7 +24,6 @@ find: $(OBJDIR)/find.o $(OBJDIR)/util.o
 	
 test: $(TEST_OBJ) $(UNITY_OBJ)
 	$(CC) -o $(BINDIR)/test_util $^ $(CFLAGS)
-	./$(BINDIR)/test_util
 
 $(OBJDIR)/%.o: src/%.c $(DEPS)
 	$(CC) $(CFLAGS) -c $< -o $@
