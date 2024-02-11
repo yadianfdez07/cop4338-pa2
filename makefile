@@ -13,6 +13,8 @@ BINDIR=bin
 
 all: clean directories find test
 
+textx: clean directories find testx
+
 run: clean directories find
 
 directories:
@@ -24,6 +26,10 @@ find: $(OBJDIR)/find.o $(OBJDIR)/util.o
 	
 test: $(TEST_OBJ) $(UNITY_OBJ)
 	$(CC) -o $(BINDIR)/test_util $^ $(CFLAGS)
+	
+testx: $(TEST_OBJ) $(UNITY_OBJ)
+	$(CC) -o $(BINDIR)/test_util $^ $(CFLAGS)
+	$(BINDIR)/test_util
 
 $(OBJDIR)/%.o: src/%.c $(DEPS)
 	$(CC) $(CFLAGS) -c $< -o $@
