@@ -3,24 +3,48 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [ {
-        "name": "(gdb) Launch",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/find",
-        "args": ["-n" , "in"],
-        "stopAtEntry": false,
-        "cwd": "${workspaceFolder}",
-        "environment": [],
-        "externalConsole": false,
-        "MIMode": "gdb",
-        "setupCommands": [
-            {
-                "description": "Enable pretty-printing for gdb",
-                "text": "-enable-pretty-printing",
-                "ignoreFailures": true
-            }
-        ],
-        "preLaunchTask": "build"
-    }]
+    "configurations": [
+        {
+            "name": "(gdb) Test Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/test_util",
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "test"
+        },
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/find",
+            "args": [
+                "-n",
+                "in"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build"
+        }
+    ]
 }

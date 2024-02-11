@@ -10,12 +10,15 @@ void tearDown(void) {
     // Code to run after each test
 }
 
-void test_add(void) {
-    TEST_ASSERT_EQUAL(7, 7);
+void test_strstr_w_option_case_sensitive_found(void) {
+    flags options = CASE;
+    char* result = strstr_w_option("Hello world", "World", options);
+    TEST_ASSERT_NOT_NULL(result);
+    TEST_ASSERT_EQUAL_STRING("World", result);
 }
 
 int main(void) {
     UNITY_BEGIN();
-    RUN_TEST(test_add);
+    RUN_TEST(test_strstr_w_option_case_sensitive_found);
     return UNITY_END();
 }
