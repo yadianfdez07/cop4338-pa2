@@ -124,9 +124,10 @@ int main(int argc, char **argv)
 	}
 
 	char initial[10] = "";
+	char possition[10] = "";
 
 	for (int i = 0; i < nlines; i++)
-	{ 
+	{
 		if (option & NUMBERED)
 		{
 			sprintf(initial, "%d. ", i + 1);
@@ -136,14 +137,20 @@ int main(int argc, char **argv)
 
 		if (((option & EXCEPT) != 0) != (first_occurrence != NULL))
 		{
+
+			if (option & FIRST)
+			{
+				sprintf(possition, "@%d: ", first_occurrence - lineptr[i]);
+			}
+
 			if (option & PARTIAL)
 			{
 				char *result = printPartial(lineptr[i], pattern, first_occurrence);
-				printf("%s%s\n", initial, result);
+				printf("%s%s%s\n", initial, possition, result);
 			}
 			else
 			{
-				printf("%s%s\n", initial, lineptr[i]);
+				printf("%s%s%s\n", initial, possition, lineptr[i]);
 			}
 		}
 	}
