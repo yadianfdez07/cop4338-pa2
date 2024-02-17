@@ -16,3 +16,5 @@ typedef enum{
 }flags;
 char* strstr_w_option(char* haystack, char* needle, flags option);
 void quicksort(char*str[], int left, int right);
+void reverse(char*str[]);
+char* printPartial(const char *sentence, const char *pattern, const char *found);

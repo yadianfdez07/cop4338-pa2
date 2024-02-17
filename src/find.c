@@ -115,10 +115,22 @@ int main(int argc, char **argv)
 			sprintf(initial, "%d. ", i + 1);
 		// search for pattern in current line
 		char *first_occurrence = strstr_w_option(lineptr[i], pattern, option);
-		// if except flag is up and pattern cannot be found in current line
+		// if except flag is up and pattern cannot be found in current linehe
 		// or if except flag is down and pattern can be found in the current line
 		if (((option & EXCEPT) != 0) != (first_occurrence != NULL))
-			printf("%s%s\n", initial, lineptr[i]); // print the line w/ number if numbered flag is raised
+		{
+			if (option & PARTIAL)
+			{
+				char* result = printPartial(lineptr[i], pattern, first_occurrence);
+				printf("%s%s\n", initial, result); 
+			}
+			else
+			{
+				printf("%s%s\n", initial, lineptr[i]); 
+			}
+			
+			
+		}
 	}
 	return 0;
 }
