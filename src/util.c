@@ -77,13 +77,11 @@ void quicksort(char *str[], int left, int right)
 void reverse(char *str[])
 {
   int length = 0;
-  // First, find the length of the array excluding the NULL terminator
   while (str[length] != NULL)
   {
     length++;
   }
 
-  // Now, reverse the array by swapping elements towards the middle
   for (int i = 0; i < length / 2; i++)
   {
     swap((void **)str, i, length - 1 - i);
