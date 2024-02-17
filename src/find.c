@@ -100,37 +100,47 @@ flags set_flags(int argc, char **argv)
 int main(int argc, char **argv)
 {
 	if (argc < 2)
+	{
 		error(1);
-	char *pattern = strdup(argv[argc - 1]); // the last CLA is considered to be the pattern
+	}
+	char *pattern = strdup(argv[argc - 1]);
+
 	flags option = set_flags(argc, argv);
+
 	if ((option & REVERSED) && (option & SORTED))
-		error(4); // cannot print the output using both sorted and reversed options...
+	{
+		error(4);
+	}
 	int nlines = readlines();
+
 	if (option & SORTED)
+	{
 		quicksort(lineptr, 0, nlines - 1);
+	}
 	char initial[10] = "";
+
 	for (int i = 0; i < nlines; i++)
-	{ // first in first out
+	{ 
 		if (option & NUMBERED)
+		{
 			sprintf(initial, "%d. ", i + 1);
-		// search for pattern in current line
+		}
+
 		char *first_occurrence = strstr_w_option(lineptr[i], pattern, option);
-		// if except flag is up and pattern cannot be found in current linehe
-		// or if except flag is down and pattern can be found in the current line
+
 		if (((option & EXCEPT) != 0) != (first_occurrence != NULL))
 		{
 			if (option & PARTIAL)
 			{
-				char* result = printPartial(lineptr[i], pattern, first_occurrence);
-				printf("%s%s\n", initial, result); 
+				char *result = printPartial(lineptr[i], pattern, first_occurrence);
+				printf("%s%s\n", initial, result);
 			}
 			else
 			{
-				printf("%s%s\n", initial, lineptr[i]); 
+				printf("%s%s\n", initial, lineptr[i]);
 			}
-			
-			
 		}
 	}
+	
 	return 0;
 }

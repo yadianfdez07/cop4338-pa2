@@ -74,76 +74,88 @@ void quicksort(char *str[], int left, int right)
   quicksort(str, last + 1, right);
 }
 
-void reverse(char *str[]) {
-    int length = 0;
-    // First, find the length of the array excluding the NULL terminator
-    while (str[length] != NULL) {
-        length++;
-    }
+void reverse(char *str[])
+{
+  int length = 0;
+  // First, find the length of the array excluding the NULL terminator
+  while (str[length] != NULL)
+  {
+    length++;
+  }
 
-    // Now, reverse the array by swapping elements towards the middle
-    for (int i = 0; i < length / 2; i++) {
-        swap((void **)str, i, length - 1 - i);
-    }
+  // Now, reverse the array by swapping elements towards the middle
+  for (int i = 0; i < length / 2; i++)
+  {
+    swap((void **)str, i, length - 1 - i);
+  }
 }
 
-char* printPartial(const char* input, const char* pattern, const char* found) {
-    if (!found) {
-        // If 'found' is NULL, implying the pattern was not found, return a copy of the original input
-        return strdup(input);
+char *printPartial(const char *input, const char *pattern, const char *found)
+{
+
+  if (!found)
+  {
+    return strdup(input);
+  }
+
+  int inputLen = strlen(input);
+  int patternLen = strlen(pattern);
+  int patternPos = found - input;
+  char *newStr = NULL;
+
+  if (inputLen <= patternLen + 15)
+  {
+    newStr = strdup(input);
+  }
+  else
+  {
+    
+    int newStrLen = 0;
+    int includeFirstEllipsis = patternPos > 10;
+    int includeSecondEllipsis = (inputLen - (patternPos + patternLen)) > 5;
+
+
+    newStrLen += includeFirstEllipsis ? 13 : patternPos;                         
+    newStrLen += patternLen;                                                     
+    newStrLen += includeSecondEllipsis ? 8 : inputLen - patternPos - patternLen; 
+
+    newStr = malloc(newStrLen + 1); 
+    if (newStr == NULL)
+    {
+      printf("Memory allocation failed\n");
+      return NULL;
     }
 
-    int inputLen = strlen(input);
-    int patternLen = strlen(pattern);
-    int patternPos = found - input; // Calculate position of the pattern
-    char* newStr = NULL;
-
-    // Determine if the whole sentence should be printed based on length criteria
-    if (inputLen <= patternLen + 15) {
-        newStr = strdup(input);
-    } else {
-        // Calculate the length needed for the new string considering ellipses and overlap conditions
-        int newStrLen = 0;
-        int includeFirstEllipsis = patternPos > 10;
-        int includeSecondEllipsis = (inputLen - (patternPos + patternLen)) > 5;
-
-        // Calculate new string length
-        newStrLen += includeFirstEllipsis ? 13 : patternPos; // First part and ellipsis
-        newStrLen += patternLen; // Pattern length
-        newStrLen += includeSecondEllipsis ? 8 : inputLen - patternPos - patternLen; // Second part and ellipsis
-
-        // Allocate memory for the new string
-        newStr = malloc(newStrLen + 1); // +1 for the null terminator
-        if (newStr == NULL) {
-            printf("Memory allocation failed\n");
-            return NULL;
-        }
-
-        // Construct the new string
-        int idx = 0;
-        if (includeFirstEllipsis) {
-            strncpy(newStr, input, 10);
-            strcpy(newStr + 10, "...");
-            idx = 13;
-        } else {
-            strncpy(newStr, input, patternPos);
-            idx = patternPos;
-        }
-
-        strncpy(newStr + idx, pattern, patternLen);
-        idx += patternLen;
-
-        if (includeSecondEllipsis) {
-            strcpy(newStr + idx, "...");
-            idx += 3;
-            strncpy(newStr + idx, input + inputLen - 5, 5);
-            idx += 5;
-        } else {
-            strncpy(newStr + idx, found + patternLen, inputLen - patternPos - patternLen);
-            idx += inputLen - patternPos - patternLen;
-        }
-        newStr[idx] = '\0'; // Ensure the string is null-terminated
+    int idx = 0;
+    if (includeFirstEllipsis)
+    {
+      strncpy(newStr, input, 10);
+      strcpy(newStr + 10, "...");
+      idx = 13;
+    }
+    else
+    {
+      strncpy(newStr, input, patternPos);
+      idx = patternPos;
     }
 
-    return newStr;
+    strncpy(newStr + idx, pattern, patternLen);
+    idx += patternLen;
+
+    if (includeSecondEllipsis)
+    {
+      strcpy(newStr + idx, "...");
+      idx += 3;
+      strncpy(newStr + idx, input + inputLen - 5, 5);
+      idx += 5;
+    }
+    else
+    {
+      strncpy(newStr + idx, found + patternLen, inputLen - patternPos - patternLen);
+      idx += inputLen - patternPos - patternLen;
+    }
+    newStr[idx] = '\0'; 
+  }
+
+  return newStr;
 }
