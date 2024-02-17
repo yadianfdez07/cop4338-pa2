@@ -117,6 +117,12 @@ int main(int argc, char **argv)
 	{
 		quicksort(lineptr, 0, nlines - 1);
 	}
+
+	if (option & REVERSED)
+	{
+		reverse(lineptr);
+	}
+
 	char initial[10] = "";
 
 	for (int i = 0; i < nlines; i++)
@@ -141,6 +147,6 @@ int main(int argc, char **argv)
 			}
 		}
 	}
-	
+
 	return 0;
 }
